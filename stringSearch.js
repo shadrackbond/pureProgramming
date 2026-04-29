@@ -28,7 +28,7 @@ function findSubstring(master, sub, align) {
     let m = 0; // index for master
     let s = 0; // index for sub
 
-    while (s < sub.length && (sub.length - s) <= (master.length - m)) {
+    while (s < sub.length && (sub.length - s) <= (master.length - m)) {// while there are characters left in sub and enough characters left in master to match sub
         if (master[m] === sub[s]) {
             m++;
             s++;
@@ -54,13 +54,13 @@ function buildAlign(string) {
     if (L > 1) align[1] = 0;
 
     for (let p = 2; p < L; p++) {
-        let q = align[p - 1];
-
+        let q = align[p - 1]; //the length of the previous best reusable prefix or howmany characters we can reuse
+        //in this string[q] == string[p-1] we check wheather the indentified prefix can be extended by one character, if not we try to find a shorter reusable prefix by looking at align[q]
         while (q >= 0 && string[q] !== string[p - 1]) {
-            q = align[q];
+            q = align[q];// fall back when the current prefix character does not match the current character, we try to find a shorter reusable prefix by looking at align[q]
         }
 
-        align[p] = q + 1;
+        align[p] = q + 1;// does the current prefix character match the current character,yes.
     }
 
     return align;
