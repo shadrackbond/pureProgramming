@@ -53,7 +53,8 @@ function buildAlign(string) {
     align[0] = -1;
     if (L > 1) align[1] = 0;
 
-    for (let p = 2; p < L; p++) {
+    for (let p = 2; p < L; p++)// we start from the third character and build the align array based on the previous characters
+        {
         let q = align[p - 1]; //the length of the previous best reusable prefix or howmany characters we can reuse
         //in this string[q] == string[p-1] we check wheather the indentified prefix can be extended by one character, if not we try to find a shorter reusable prefix by looking at align[q]
         while (q >= 0 && string[q] !== string[p - 1]) {
