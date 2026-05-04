@@ -2,24 +2,27 @@
 //tokenizing is the process of breaking a stream of text into meaningful units called tokens
 //tokens are the basic building blocks of a programming language, and they can be keywords, identifiers, literals, operators, etc.
 
-export const END = Symbol('END');
+export const END = Symbol('END'); // we have an End variable that is not changeable and something of it connected to the same symbol
 
-export class TextTokenizer {
+export class TextTokenizer { // initialising a class for tokenizing
     #tokenTypes;
 
-    constructor(tokenTypes) {
+    constructor(tokenTypes) {// this is a constructor that holds configuration for what tokens to look out for
         this.#tokenTypes = tokenTypes;
     }
 
-    *tokenize(text){
-        let index = 0;
+    *tokenize(text){ // method to iterate through the text to find tokens based on rule in constructor
+        let index = 0; // initialising index to 0
+        /*
+        we set up a while condition to check for as long as the index is less than the length of the text
+        */
         while(index<text.length){
-            let hasMatched = false;
-
+            let hasMatched = false; 
+            // this is where the iteration/ looping is taking place
             for(const {matcher,type,valueExtractor} of this.#tokenTypes){
-                const currentMatcher = new RegExp(matcher.source,"y");
-                currentMatcher.lastIndex = index;
-                const matched = currentMatcher.exec(text);
+                const currentMatcher = new RegExp(matcher.source,"y");//the y flag by cloning the regexp into a new variable currentMatcher
+                currentMatcher.lastIndex = index; // updating the index value to the currentMatcher last index
+                const matched = currentMatcher.exec(text);//try matching the currentMatcher with the text and store the result in matched variable
 
                 if(matched !== null){
                     index += matched[0].length;
@@ -30,7 +33,7 @@ export class TextTokenizer {
                         }
                         yield token;
                     }
-                    hasMatchED = true;
+                    hasMatched = true;
                 }
             }
             if(!hasMatched){
