@@ -35,6 +35,8 @@ function runLengthEncoding(string){
 
 console.log(runLengthEncoding("aaaaaaaabbbbbbbbcccccd"))
 
+//second implementation
+
 function runLengthEncoding2(string){
   let result = "";
   let count = 1;
@@ -53,4 +55,18 @@ function runLengthEncoding2(string){
   return result
 }
 
-console.log(runLengthEncoding2("aaaaaaaabbbbbbbbcccccd"))
+const encodedString = runLengthEncoding2("aaaaaaaaaaaaaaaabbbbbbbbcccccd");
+console.log(encodedString)
+
+// decoding the encoded string
+function runLengthDecoding(encodedString){
+  let result = "";
+  for(let i = 0; i < encodedString.length; i+=2){ // we are iterating through the encoded string with a step of 2 because we are looking at pairs of count and character
+    const count = parseInt(encodedString[i]);// we are parsing the count from the encoded string, which is a string representation of a number, into an actual number using parseInt
+    const char = encodedString[i+1];// we are getting the character from the encoded string, which is the next character after the count
+    result += char.repeat(count);// we are using the repeat method to repeat the character count times and adding it to the result string
+  }
+  return result;
+}
+
+console.log(runLengthDecoding(encodedString))

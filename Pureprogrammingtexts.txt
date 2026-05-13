@@ -1,2 +1,3 @@
 for the link to the advanced features of text tokenizing here id the link to the advanced features:
 --> https://dev.to/ndesmic/writing-a-tokenizer-1j85
+--> https://javascript.plainenglish.io/run-length-encoding-21241e00fcbb
